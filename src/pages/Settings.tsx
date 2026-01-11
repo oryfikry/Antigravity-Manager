@@ -55,6 +55,13 @@ function Settings() {
         invoke<string>('get_data_dir_path')
             .then(path => setDataDirPath(path))
             .catch(err => console.error('Failed to get data dir:', err));
+
+        // 加载更新设置
+        invoke<{ auto_check: boolean; last_check_time: number }>('get_update_settings')
+            .then(settings => {
+                setFormData(prev => ({ ...prev, auto_check_update: settings.auto_check }));
+            })
+            .catch(err => console.error('Failed to load update settings:', err));
     }, [loadConfig]);
 
     useEffect(() => {
@@ -280,6 +287,37 @@ function Settings() {
                                     <option value="enabled">{t('settings.general.auto_launch_enabled')}</option>
                                 </select>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{t('settings.general.auto_launch_desc')}</p>
+                            </div>
+
+                            {/* 自动检查更新 */}
+                            <div className="flex items-center justify-between p-4 bg-gray-50 dark:bg-base-200 rounded-lg border border-gray-100 dark:border-base-300">
+                                <div>
+                                    <div className="font-medium text-gray-900 dark:text-base-content">自动检查更新</div>
+                                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">启动时自动检查新版本（每 24 小时一次）</p>
+                                </div>
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        className="sr-only peer"
+                                        checked={formData.auto_check_update ?? true}
+                                        onChange={async (e) => {
+                                            const enabled = e.target.checked;
+                                            try {
+                                                await invoke('save_update_settings', {
+                                                    settings: {
+                                                        auto_check: enabled,
+                                                        last_check_time: 0
+                                                    }
+                                                });
+                                                setFormData({ ...formData, auto_check_update: enabled });
+                                                showToast(enabled ? '已启用自动检查更新' : '已禁用自动检查更新', 'success');
+                                            } catch (error) {
+                                                showToast(`${t('common.error')}: ${error}`, 'error');
+                                            }
+                                        }}
+                                    />
+                                    <div className="w-11 h-6 bg-gray-200 dark:bg-base-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                                </label>
                             </div>
                         </div>
                     )}
