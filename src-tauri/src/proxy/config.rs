@@ -1,3 +1,4 @@
+// 2026-1-13 修复claude中反复压缩的问题
 use serde::{Deserialize, Serialize};
 // use std::path::PathBuf;
 use std::collections::HashMap;
