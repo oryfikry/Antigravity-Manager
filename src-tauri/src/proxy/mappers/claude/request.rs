@@ -620,9 +620,16 @@ fn build_system_instruction(system: &Option<SystemPrompt>, _model_name: &str, ha
     if let Some(sys) = system {
         match sys {
             SystemPrompt::String(text) => {
-                // [NEW] 过滤 Claude Code 注入的超长 CLI 规则说明 (通常 > 2000 字符)
-                if text.len() > 1000 && text.contains("You are an interactive CLI tool") {
-                    tracing::info!("[Claude-Request] Filtering out long redundant Claude Code system instruction (len: {})", text.len());
+                // [FIX] 过滤 OpenCode 默认提示词，但保留用户自定义指令 (Instructions from: ...)
+                if text.contains("You are an interactive CLI tool") {
+                    // 提取用户自定义指令部分
+                    if let Some(idx) = text.find("Instructions from:") {
+                        let custom_part = &text[idx..];
+                        tracing::info!("[Claude-Request] Extracted custom instructions (len: {}), filtered default prompt", custom_part.len());
+                        parts.push(json!({"text": custom_part}));
+                    } else {
+                        tracing::info!("[Claude-Request] Filtering out OpenCode default system instruction (len: {})", text.len());
+                    }
                 } else {
                     parts.push(json!({"text": text}));
                 }
@@ -630,9 +637,15 @@ fn build_system_instruction(system: &Option<SystemPrompt>, _model_name: &str, ha
             SystemPrompt::Array(blocks) => {
                 for block in blocks {
                     if block.block_type == "text" {
-                        // [NEW] 过滤数组形式的超长指令
-                        if block.text.len() > 1000 && block.text.contains("You are an interactive CLI tool") {
-                            tracing::info!("[Claude-Request] Filtering out long redundant Claude Code system block (len: {})", block.text.len());
+                        // [FIX] 过滤 OpenCode 默认提示词，但保留用户自定义指令
+                        if block.text.contains("You are an interactive CLI tool") {
+                            if let Some(idx) = block.text.find("Instructions from:") {
+                                let custom_part = &block.text[idx..];
+                                tracing::info!("[Claude-Request] Extracted custom instructions from block (len: {})", custom_part.len());
+                                parts.push(json!({"text": custom_part}));
+                            } else {
+                                tracing::info!("[Claude-Request] Filtering out OpenCode default system block (len: {})", block.text.len());
+                            }
                         } else {
                             parts.push(json!({"text": block.text}));
                         }
