@@ -896,13 +896,28 @@ pub async fn handle_messages(
             // 完全移除所有 thinking 相关内容
             request_for_body.thinking = None;
             
-            // 清理历史消息中的所有 Thinking Block
+            // 清理历史消息中的所有 Thinking Block，将其转换为 Text 以保留上下文
             for msg in request_for_body.messages.iter_mut() {
                 if let crate::proxy::mappers::claude::models::MessageContent::Array(blocks) = &mut msg.content {
-                    blocks.retain(|b| !matches!(b, 
-                        crate::proxy::mappers::claude::models::ContentBlock::Thinking { .. } |
-                        crate::proxy::mappers::claude::models::ContentBlock::RedactedThinking { .. }
-                    ));
+                    let mut new_blocks = Vec::with_capacity(blocks.len());
+                    for block in blocks.drain(..) {
+                        match block {
+                            crate::proxy::mappers::claude::models::ContentBlock::Thinking { thinking, .. } => {
+                                // 降级为 text
+                                if !thinking.is_empty() {
+                                    tracing::debug!("[Fallback] Converting thinking block to text (len={})", thinking.len());
+                                    new_blocks.push(crate::proxy::mappers::claude::models::ContentBlock::Text { 
+                                        text: thinking 
+                                    });
+                                }
+                            },
+                            crate::proxy::mappers::claude::models::ContentBlock::RedactedThinking { .. } => {
+                                // Redacted thinking 没什么用，直接丢弃
+                            },
+                            _ => new_blocks.push(block),
+                        }
+                    }
+                    *blocks = new_blocks;
                 }
             }
             
