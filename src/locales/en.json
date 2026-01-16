@@ -637,6 +637,30 @@
             "model_id": "Model ID",
             "description": "Description",
             "action": "Action"
+        },
+        "cli_sync": {
+            "title": "One-click CLI Sync",
+            "subtitle": "Quickly sync current API endpoints and keys to your local AI CLI tools.",
+            "card_title": "{{name}} Config",
+            "status": {
+                "not_installed": "Not detected",
+                "installed": "Installed ({{version}})",
+                "synced": "Pointed to this app",
+                "not_synced": "Not synced",
+                "detecting": "Detecting..."
+            },
+            "btn_sync": "Sync Config Now",
+            "btn_view": "View Config",
+            "btn_restore": "Restore Defaults",
+            "restore_confirm": "Are you sure you want to restore the configuration for {{name}} to the official default URL?",
+            "modal": {
+                "view_title": "{{name}} Config Content",
+                "copy_success": "Config content copied"
+            },
+            "toast": {
+                "sync_success": "Sync successful! {{name}} is ready.",
+                "sync_error": "Sync failed: {{error}}"
+            }
         }
     },
     "monitor": {

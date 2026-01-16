@@ -1,5 +1,5 @@
 # Antigravity Tools 🚀
-> 专业的 AI 账号管理与协议反代系统 (v3.3.34)
+> 专业的 AI 账号管理与协议反代系统 (v3.3.35)
 <div align="center">
   <img src="public/icon.png" alt="Antigravity Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
 
@@ -8,7 +8,7 @@
   
   <p>
     <a href="https://github.com/lbjlaq/Antigravity-Manager">
-      <img src="https://img.shields.io/badge/Version-3.3.34-blue?style=flat-square" alt="Version">
+      <img src="https://img.shields.io/badge/Version-3.3.35-blue?style=flat-square" alt="Version">
     </a>
     <img src="https://img.shields.io/badge/Tauri-v2-orange?style=flat-square" alt="Tauri">
     <img src="https://img.shields.io/badge/Backend-Rust-red?style=flat-square" alt="Rust">
@@ -205,6 +205,15 @@ print(response.choices[0].message.content)
 ## 📝 开发者与社区
 
 *   **版本演进 (Changelog)**:
+    *   **v3.3.35 (2026-01-16)**:
+        - **CLI 同步功能重大增强 (CLI Sync Enhancements)**:
+            - **多配置文件支持**: 现已支持同步每个 CLI 的多个配置文件，确保环境配置更完整。涵盖 Claude Code (`settings.json`, `.claude.json`)、Codex (`auth.json`, `config.toml`) 及 Gemini CLI (`.env`, `settings.json`, `config.json`)。
+            - **Claude 免登录特权**: 同步时会自动在 `~/.claude.json` 中注入 `"hasCompletedOnboarding": true`，帮助新用户直接跳过 Claude CLI 的初始登录/引导步骤。
+            - **多文件查阅体验**: 配置查看详情页升级为“标签页”模式，支持在一个弹窗内顺畅切换并查看该 CLI 关联的所有本地配置文件。
+        - **UI/UX 深度细节优化**:
+            - **弹窗体验统一**: 将“恢复默认配置”的确认框由原生浏览器弹窗替换为应用主题一致的 `ModalDialog`。
+            - **图标与显示优化**: 优化了恢复按钮图标 (RotateCcw)；精简了状态标签文案并强制不换行，彻底解决了高分屏或窄窗口下的布局错位问题。
+            - **版本号精简**: 改进了 CLI 版本号提取逻辑，界面仅保留纯数字版本（如 v0.86.0），视觉更加清爽。
     *   **v3.3.34 (2026-01-16)**:
         - **OpenAI Codex/Responses 协议修复 (Fix Issue #742)**:
             - **400 Invalid Argument 彻底修复**:

@@ -637,6 +637,30 @@
             "model_id": "模型 ID",
             "description": "描述",
             "action": "操作"
+        },
+        "cli_sync": {
+            "title": "CLI 配置一键同步",
+            "subtitle": "快速将当前 API 服务地址与 API 密钥同步到本地 AI CLI 工具中",
+            "card_title": "{{name}} 配置",
+            "status": {
+                "not_installed": "未检测到安装",
+                "installed": "v{{version}}",
+                "synced": "已同步",
+                "not_synced": "未同步",
+                "detecting": "检测中..."
+            },
+            "btn_sync": "立即同步配置",
+            "btn_view": "查看当前配置",
+            "btn_restore": "恢复默认配置",
+            "restore_confirm": "确定要将 {{name}} 的配置恢复为官方默认地址吗？",
+            "modal": {
+                "view_title": "{{name}} 配置文件内容",
+                "copy_success": "配置内容已复制"
+            },
+            "toast": {
+                "sync_success": "同步成功！{{name}} 已准备就绪。",
+                "sync_error": "同步失败：{{error}}"
+            }
         }
     },
     "monitor": {

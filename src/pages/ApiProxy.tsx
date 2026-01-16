@@ -31,6 +31,7 @@ import { showToast } from '../components/common/ToastContainer';
 import { cn } from '../utils/cn';
 import { useProxyModels } from '../hooks/useProxyModels';
 import GroupedSelect, { SelectOption } from '../components/common/GroupedSelect';
+import { CliSyncCard } from '../components/proxy/CliSyncCard';
 
 interface ProxyStatus {
     running: boolean;
@@ -1471,6 +1472,18 @@ print(response.text)`;
                         </div>
                     )
                 }
+                {/* CLI 同步卡片 */}
+                {
+                    appConfig && status.running && (
+                        <div className="mt-4">
+                            <CliSyncCard
+                                proxyUrl={status.base_url}
+                                apiKey={appConfig.proxy.api_key}
+                            />
+                        </div>
+                    )
+                }
+
                 {/* 多协议支持信息 */}
                 {
                     appConfig && status.running && (
@@ -1560,6 +1573,7 @@ print(response.text)`;
                         </div>
                     )
                 }
+
 
                 {/* 支持模型与集成 */}
                 {
