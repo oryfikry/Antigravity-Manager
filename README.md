@@ -1,5 +1,5 @@
 # Antigravity Tools 🚀
-> 专业的 AI 账号管理与协议反代系统 (v3.3.38)
+> 专业的 AI 账号管理与协议反代系统 (v3.3.39)
 <div align="center">
   <img src="public/icon.png" alt="Antigravity Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
 
@@ -8,7 +8,7 @@
   
   <p>
     <a href="https://github.com/lbjlaq/Antigravity-Manager">
-      <img src="https://img.shields.io/badge/Version-3.3.38-blue?style=flat-square" alt="Version">
+      <img src="https://img.shields.io/badge/Version-3.3.39-blue?style=flat-square" alt="Version">
     </a>
     <img src="https://img.shields.io/badge/Tauri-v2-orange?style=flat-square" alt="Tauri">
     <img src="https://img.shields.io/badge/Backend-Rust-red?style=flat-square" alt="Rust">
@@ -205,6 +205,17 @@ print(response.choices[0].message.content)
 ## 📝 开发者与社区
 
 *   **版本演进 (Changelog)**:
+    *   **v3.3.39 (2026-01-17)**:
+        - **修复 Claude Code 文件搜索错误 (Issue #785)**：
+            - 同步流式与非流式响应的工具参数重映射逻辑，解决 `grep` 工具在流式模式下参数不一致导致的搜索失败。
+            - 增强 `grep` 参数处理，支持 `-n` (行号)、`ignore_case` (忽略大小写) 及布尔值自动强制转换。
+        - **Thinking 模式稳定性大幅提升**：
+            - 引入跨模型家族签名校验，自动识别并降级不兼容的思维链签名，防止 400 Bad Request 错误。
+            - 增强“会话自愈 (Session Healing)”逻辑，支持自动补全被中断的工具循环，确保满足 Google/Vertex AI 的严苛结构要求。
+        - **Gemini 参数幻觉修复**：
+            - 实现泛用参数重映射逻辑，自动修复模型将 `path` 误标记为 `paths` 数组的常见问题。
+        - **高可用性增强**：
+            - 优化自动端点降级 (Endpoint Fallback) 逻辑，在 429 或 5xx 错误时更平滑地切换至备用 API 端点。
     *   **v3.3.38 (2026-01-17)**:
         - **CLI 同步增强与探测修复 (Fix CLI-Sync Detection)**:
             - **探测路径扩展**: 优化了二进制检测逻辑。新增对 `~/.local/bin` (curl 安装常用路径)、`~/.npm-global/bin` 以及 `~/bin` 的扫描。

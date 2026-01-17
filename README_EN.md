@@ -1,5 +1,5 @@
 # Antigravity Tools 🚀
-> Professional AI Account Management & Proxy System (v3.3.38)
+> Professional AI Account Management & Proxy System (v3.3.39)
 
 <div align="center">
   <img src="public/icon.png" alt="Antigravity Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
@@ -9,7 +9,7 @@
   
   <p>
     <a href="https://github.com/lbjlaq/Antigravity-Manager">
-      <img src="https://img.shields.io/badge/Version-3.3.38-blue?style=flat-square" alt="Version">
+      <img src="https://img.shields.io/badge/Version-3.3.39-blue?style=flat-square" alt="Version">
     </a>
     <img src="https://img.shields.io/badge/Tauri-v2-orange?style=flat-square" alt="Tauri">
     <img src="https://img.shields.io/badge/Backend-Rust-red?style=flat-square" alt="Rust">
@@ -187,6 +187,17 @@ print(response.choices[0].message.content)
 ## 📝 Developer & Community
 
 *   **Changelog**:
+    *   **v3.3.39 (2026-01-17)**:
+        - **Fix Claude Code File Search Error (Issue #785)**:
+            - Synchronized tool parameter remapping between streaming and non-streaming responses, resolving search failures caused by inconsistent `grep` arguments.
+            - Enhanced `grep` parameter handling with support for `-n` (line numbers), `ignore_case`, and automatic boolean coercion.
+        - **Enhanced Thinking Mode Stability**:
+            - Introduced cross-model family signature validation to automatically downgrade incompatible thinking signatures, preventing 400 Bad Request errors.
+            - Improved "Session Healing" logic to automatically recover interrupted tool loops and ensure compliance with strict Google/Vertex AI structural requirements.
+        - **Gemini Parameter Hallucination Fix**:
+            - Implemented generic parameter remapping to automatically fix common model hallucinations like using `paths` array instead of `path` string.
+        - **High Availability Improvements**:
+            - Optimized automatic Endpoint Fallback logic for smoother transitions to backup API endpoints during 429 or 5xx errors.
     *   **v3.3.38 (2026-01-17)**:
         - **Thinking Signature Deep Fix & Session Healing (Core Fix)**:
             - **Robust Retry Logic**: Fixed the retry counting logic to ensure single-account users can still trigger internal retries for signature errors, improving auto-recovery rates.
