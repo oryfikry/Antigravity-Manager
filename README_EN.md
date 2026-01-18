@@ -1,5 +1,5 @@
 # Antigravity Tools 🚀
-> Professional AI Account Management & Proxy System (v3.3.42)
+> Professional AI Account Management & Proxy System (v3.3.43)
 
 <div align="center">
   <img src="public/icon.png" alt="Antigravity Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
@@ -9,7 +9,7 @@
   
   <p>
     <a href="https://github.com/lbjlaq/Antigravity-Manager">
-      <img src="https://img.shields.io/badge/Version-3.3.42-blue?style=flat-square" alt="Version">
+      <img src="https://img.shields.io/badge/Version-3.3.43-blue?style=flat-square" alt="Version">
     </a>
     <img src="https://img.shields.io/badge/Tauri-v2-orange?style=flat-square" alt="Tauri">
     <img src="https://img.shields.io/badge/Backend-Rust-red?style=flat-square" alt="Rust">
@@ -59,7 +59,7 @@ If you find this project helpful, feel free to buy me a coffee!
 *   **Smart Recommendation**: The system uses a real-time algorithm to filter and recommend the "Best Account" based on quota redundancy, supporting **one-click switching**.
 *   **Active Account Snapshot**: Visually displays the specific quota percentage and the last synchronization time of the currently active account.
 
-### 2. 🔐 Professional AI Account Management & Proxy System (v3.3.42)
+### 2. 🔐 Professional AI Account Management & Proxy System
 *   **OAuth 2.0 Authorization (Auto/Manual)**: Pre-generates a copyable authorization URL so you can finish auth in any browser; after the callback, the app auto-completes and saves the account (use “I already authorized, continue” if needed).
 *   **Multi-dimensional Import**: Supports single token entry, JSON batch import, and automatic hot migration from V1 legacy databases.
 *   **Gateway-level Views**: Supports switching between "List" and "Grid" views. Provides 403 Forbidden detection, automatically marking and skipping accounts with permission anomalies.
@@ -187,6 +187,15 @@ print(response.choices[0].message.content)
 ## 📝 Developer & Community
 
 *   **Changelog**:
+    *   **v3.3.43 (2026-01-18)**:
+        - **[i18n] Full Internationalization of Device Fingerprint Dialog (PR #825, thanks to @IamAshrafee)**:
+            - Completely resolved the hard-coded Chinese strings in the Device Fingerprint dialog.
+            - Added translation skeletons for 8 languages (EN, JA, VI, etc.) to ensure a consistent experience.
+        - **[Japanese] Translation Completion & Terminology Optimization (PR #822, thanks to @Koshikai)**:
+            - Added 50+ missing translation keys covering core settings like Quota Protection, HTTP API, and Update Checks.
+            - Improved technical wording for natural Japanese expressions (e.g., `pro_low` to "低消費").
+        - **[Fix] Vietnamese Spelling Correction (PR #798, thanks to @vietnhatthai)**:
+            - Fixed a typo in the Vietnamese `refresh_msg` (`hiện đài` -> `hiện tại`).
     *   **v3.3.42 (2026-01-18)**:
         - **[Traffic Log Enhancement] Protocol Recognition & Stream Integration (PR #814)**:
             - **Protocol Labeling**: Traffic logs now automatically identify and label protocol types (OpenAI in Green, Anthropic in Orange, Gemini in Blue) based on URI, providing instant clarity on request sources.

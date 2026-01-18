@@ -1,5 +1,5 @@
 # Antigravity Tools 🚀
-> 专业的 AI 账号管理与协议反代系统 (v3.3.42)
+> 专业的 AI 账号管理与协议反代系统 (v3.3.43)
 <div align="center">
   <img src="public/icon.png" alt="Antigravity Logo" width="120" height="120" style="border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
 
@@ -8,7 +8,7 @@
   
   <p>
     <a href="https://github.com/lbjlaq/Antigravity-Manager">
-      <img src="https://img.shields.io/badge/Version-3.3.42-blue?style=flat-square" alt="Version">
+      <img src="https://img.shields.io/badge/Version-3.3.43-blue?style=flat-square" alt="Version">
     </a>
     <img src="https://img.shields.io/badge/Tauri-v2-orange?style=flat-square" alt="Tauri">
     <img src="https://img.shields.io/badge/Backend-Rust-red?style=flat-square" alt="Rust">
@@ -205,6 +205,15 @@ print(response.choices[0].message.content)
 ## 📝 开发者与社区
 
 *   **版本演进 (Changelog)**:
+    *   **v3.3.43 (2026-01-18)**:
+        - **[国际化] 设备指纹对话框全量本地化 (PR #825, 感谢 @IamAshrafee)**:
+            - 彻底解决了设备指纹（Device Fingerprint）对话框中残留的硬编码中文字符串问题。
+            - 补全了英、繁、日等 8 种语言的翻译骨架，提升全球化体验。
+        - **[日语优化] 日语翻译补全与术语修正 (PR #822, 感谢 @Koshikai)**:
+            - 补全了 50 多个缺失的翻译键，覆盖配额保护、HTTP API、更新检查等核心设置。
+            - 优化了技术术语，使日语表达更自然（例如：`pro_low` 译为“低消費”）。
+        - **[翻译修复] 越南语拼写错误修正 (PR #798, 感谢 @vietnhatthai)**:
+            - 修复了越南语设置中 `refresh_msg` 的拼写错误（`hiện đài` -> `hiện tại`）。
     *   **v3.3.42 (2026-01-18)**:
         - **[流量日志增强] 协议自动识别与流式响应整合 (PR #814)**:
             - **协议标签分类**: 流量日志列表现在可以根据 URI 自动识别并标注协议类型（OpenAI 绿色、Anthropic 橙色、Gemini 蓝色），使请求来源一目了然。
