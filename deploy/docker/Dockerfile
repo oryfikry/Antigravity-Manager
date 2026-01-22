@@ -67,7 +67,8 @@ ENV DISPLAY=:1 \
     BROWSER=/usr/bin/firefox-esr \
     MOZ_DISABLE_CONTENT_SANDBOX=1
 
-COPY --chown=antigravity:antigravity start.sh /home/antigravity/start.sh
+# CHANGED: 'start.sh' to 'Start.sh' to match your GitHub repo casing
+COPY --chown=antigravity:antigravity Start.sh /home/antigravity/start.sh
 RUN chmod +x /home/antigravity/start.sh
 
 USER antigravity
